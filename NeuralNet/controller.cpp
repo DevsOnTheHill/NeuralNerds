@@ -41,6 +41,7 @@ vector<double> redirect(vector<double> output){
 
 int main(){
 	ofstream fout;
+	vector<int> outputOrder;
 	fout.open("data.txt");
 	count = 0;
 	Params p;
@@ -80,7 +81,7 @@ int main(){
 				}
 				else{
 					if(outputs.size() == 2){
-						outputs = redirect(outputs);
+						//outputs = redirect(outputs);
 						count ++;
 						cout<<"HERE"<<endl;
 					}
@@ -91,7 +92,7 @@ int main(){
 				}
 
 
-		    //g.drawBoard();
+		    g.drawBoard();
 				cout<<"Genome Number: "<<i+1<<endl;
 
 		    if( g.done ) break;
@@ -101,15 +102,31 @@ int main(){
 					inputs = g.toInput();
 					outputs = net.Update(inputs);
 				}
+
+
+				for(int i = 0; i < outputs.size(); ++i){
+					int largestSpot = 0;
+					for(int j = 0; j < outputs.size(); ++j){
+						if(outputs[j] > outputs[largestSpot]){
+							largestSpot = j;
+						}
+					}
+					output[largestSpot] = -100000000000;
+					outputOrder[i] = largestSpot;
+				}
+
+
 				/// Changes outputs into two bit binary format
+				/*
 				for(int i = 0; i < outputs.size(); ++i){
 					//cout<<"Output pre Binary: "<<outputs[1]<<endl;
 					if(outputs[i] > 0){outputs[i] = 1;}
 					else if(outputs[i] <= 0){outputs[i] = 0;}
 					else{cout<<"Those Number are UNREAL Man"<<endl; break;}
 				}
+				*/
 
-				for(int j = 0; j < outputs.size(); ++j) cout<<outputs[j]<<endl;
+				//for(int j = 0; j < outputs.size(); ++j) cout<<outputs[j]<<endl;
 				//for(int i = 0; i < 100000000; ++i);
 				g.netMove(outputs);
 		  }

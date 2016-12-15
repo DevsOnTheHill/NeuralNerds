@@ -108,6 +108,7 @@ void g2048::netMove(vector<double> output){
   ///////////// Set up With only 2 Output Neurons ///////////////
   //     11 = UP // 00 = DOWN // 10 = LEFT // 01 = RIGHT       //
   ///////////////////////////////////////////////////////////////
+  /*
   moved = false;
 
   if(output[0] == 1){
@@ -122,12 +123,22 @@ void g2048::netMove(vector<double> output){
   for( int y = 0; y < 4; y++ )
     for( int x = 0; x < 4; x++ )
       board[x][y].blocked = false;
-
+  */
   ///////////// Set up With 4 Output Neurons ///////////////
   //  UP, DOWN, LEFT, RIGHT
   //////////////////////////////////////////////////////////
-  /*
+
   moved = false;
+  double largest=0;
+  int largestSpot=0;
+  for(int i = 0; i < output.size(); ++i){
+      if(output[i] > largest){
+        largest = output[i];
+        largestSpot = i;
+      }
+  }
+
+  output[largestSpot] = 1;
 
   if(output[0] == 1) move( UP );
   else if(output[1] == 1) move( DOWN );
@@ -139,7 +150,7 @@ void g2048::netMove(vector<double> output){
     for( int x = 0; x < 4; x++ )
       board[x][y].blocked = false;
 
-  */
+
 
 }
 

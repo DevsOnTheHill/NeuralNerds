@@ -12,7 +12,6 @@
 
 using namespace std;
 
-enum movDir { UP, DOWN, LEFT, RIGHT };
 
 int count;
 
@@ -77,15 +76,17 @@ int main(){
 
 		  while( true )//This is the 2048 game loop
 		  {
+
 		    if( g.moved ){
 					g.addTile();
 					//illegalMoves=0;
 					count = 0;
 				}
 				else{
-
-					g.move(outputOrder[count]);
-
+					if(outputOrder.size() == 4){
+						g.move(outputOrder[count]);
+					}
+					//cout<<"HERE"<<endl;
 					//illegalMoves++;
 					//cout<<illegalMoves<<endl;
 					//if(illegalMoves >= maxIllegalMoves){illegalMoves = 0; break;}
@@ -111,8 +112,8 @@ int main(){
 							largestSpot = j;
 						}
 					}
-					output[largestSpot] = -100000000000;
-					outputOrder[i] = largestSpot;
+					outputs[largestSpot] = -100000000000;
+					outputOrder.push_back(largestSpot);
 				}
 
 

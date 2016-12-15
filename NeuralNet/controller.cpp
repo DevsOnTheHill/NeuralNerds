@@ -65,6 +65,12 @@ int main(){
 	int maxFit = 0;
 	int totalFit = 0;
 	int aveFit = 0;
+
+	g2048 g;
+
+	inputs = g.toInput();
+	outputs = net.Update(inputs);
+
 	while(true){//This will be the start of the main loop for the genalg.
 
 		genNum++;
@@ -77,35 +83,6 @@ int main(){
 		  while( true )//This is the 2048 game loop
 		  {
 
-		    if( g.moved ){
-					g.addTile();
-					//illegalMoves=0;
-					count = 0;
-				}
-				else{
-					if(outputOrder.size() == 4){
-						g.move(outputOrder[count]);
-					}
-					//cout<<"HERE"<<endl;
-					//illegalMoves++;
-					//cout<<illegalMoves<<endl;
-					//if(illegalMoves >= maxIllegalMoves){illegalMoves = 0; break;}
-				}
-
-
-		    g.drawBoard();
-				cout<<"Genome Number: "<<i+1<<endl;
-
-		    if( g.done ) break;
-		    //g.waitKey();
-
-				if(count <= 0){
-					inputs = g.toInput();
-					outputs = net.Update(inputs);
-					outputOrder.clear();
-				}
-
-				for(int j = 0; j < outputs.size(); ++j) cout<<outputs[j]<<endl;
 
 				for(int i = 0; i < outputs.size(); ++i){
 					int largestSpot = 0;
@@ -120,7 +97,40 @@ int main(){
 					outputOrder.push_back(largestSpot);
 				}
 
-				for(int i = 0; i < outputOrder.size(); ++i) cout<<outputOrder[i]<<endl;
+				g.move(outputOrder[count]);
+
+		    if( g.moved ){
+					g.addTile();
+					//illegalMoves=0;
+					count = 0;
+					inputs = g.toInput();
+					outputs = net.Update(inputs);
+					outputOrder.clear();
+				}
+				else{
+					if(outputOrder.size() == 4){
+						count++;
+					}
+					//cout<<"HERE"<<endl;
+					//illegalMoves++;
+					//cout<<illegalMoves<<endl;
+					//if(illegalMoves >= maxIllegalMoves){illegalMoves = 0; break;}
+				}
+
+
+		    g.drawBoard();
+				cout<<"Genome Number: "<<i+1<<endl;
+
+		    if( g.done ) break;
+		    //g.waitKey();
+
+
+
+				//for(int j = 0; j < outputs.size(); ++j) cout<<outputs[j]<<endl;
+
+
+
+				//for(int i = 0; i < outputOrder.size(); ++i) cout<<outputOrder[i]<<endl;
 
 				/// Changes outputs into two bit binary format
 				/*
@@ -135,8 +145,8 @@ int main(){
 				//for(int j = 0; j < outputs.size(); ++j) cout<<outputs[j]<<endl;
 				//for(int i = 0; i < 100000000; ++i);
 				//g.netMove(outputs);
-				g.move(outputOrder[count]);
-				count++;
+
+				//count++;
 		  }
 			gen.population[i].setfitness(g.score);
 			totalFit += g.score;

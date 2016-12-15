@@ -14,6 +14,10 @@ using namespace std;
 
 int count;
 
+/**redirects illegal moves by the Neural Net
+@param output vector
+@return modified output vector
+*/
 vector<double> redirect(vector<double> output){
 	bool a = output[0];
 	bool b = output[1];

@@ -12,12 +12,15 @@
 
 using namespace std;
 
+enum movDir { UP, DOWN, LEFT, RIGHT };
+
 int count;
 
 /**redirects illegal moves by the Neural Net
 @param output vector
 @return modified output vector
 */
+/*
 vector<double> redirect(vector<double> output){
 	bool a = output[0];
 	bool b = output[1];
@@ -37,7 +40,7 @@ vector<double> redirect(vector<double> output){
 	output[1] = b;
 	return output;
 }
-
+*/
 
 int main(){
 	ofstream fout;
@@ -80,11 +83,8 @@ int main(){
 					count = 0;
 				}
 				else{
-					if(outputs.size() == 2){
-						//outputs = redirect(outputs);
-						count ++;
-						cout<<"HERE"<<endl;
-					}
+
+					g.move(outputOrder[count]);
 
 					//illegalMoves++;
 					//cout<<illegalMoves<<endl;
@@ -128,7 +128,9 @@ int main(){
 
 				//for(int j = 0; j < outputs.size(); ++j) cout<<outputs[j]<<endl;
 				//for(int i = 0; i < 100000000; ++i);
-				g.netMove(outputs);
+				//g.netMove(outputs);
+				g.move(outputOrder[count]);
+				count++;
 		  }
 			gen.population[i].setfitness(g.score);
 			totalFit += g.score;

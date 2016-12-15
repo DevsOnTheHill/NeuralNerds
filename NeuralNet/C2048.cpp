@@ -305,3 +305,40 @@ void g2048::move( movDir d ){
     }
   }
 }
+
+void g2048::move( int d ){
+  switch( d )
+  {
+      case 0:
+        for( int x = 0; x < 4; x++ )
+    {
+        int y = 1;
+        while( y < 4 )
+        { if( board[x][y].val ) moveVert( x, y, -1 ); y++;}
+    }
+    break;
+      case 1:
+    for( int x = 0; x < 4; x++ )
+    {
+        int y = 2;
+        while( y >= 0 )
+        { if( board[x][y].val ) moveVert( x, y, 1 ); y--;}
+    }
+    break;
+      case 2:
+    for( int y = 0; y < 4; y++ )
+    {
+        int x = 1;
+        while( x < 4 )
+        { if( board[x][y].val ) moveHori( x, y, -1 ); x++;}
+    }
+    break;
+      case 3:
+    for( int y = 0; y < 4; y++ )
+    {
+        int x = 2;
+        while( x >= 0 )
+        { if( board[x][y].val ) moveHori( x, y, 1 ); x--;}
+    }
+  }
+}

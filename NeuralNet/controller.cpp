@@ -102,20 +102,25 @@ int main(){
 				if(count <= 0){
 					inputs = g.toInput();
 					outputs = net.Update(inputs);
+					outputOrder.clear();
 				}
 
+				for(int j = 0; j < outputs.size(); ++j) cout<<outputs[j]<<endl;
 
 				for(int i = 0; i < outputs.size(); ++i){
 					int largestSpot = 0;
 					for(int j = 0; j < outputs.size(); ++j){
 						if(outputs[j] > outputs[largestSpot]){
+
 							largestSpot = j;
+							cout<<"Largest: "<<largestSpot<<endl;
 						}
 					}
 					outputs[largestSpot] = -100000000000;
 					outputOrder.push_back(largestSpot);
 				}
 
+				for(int i = 0; i < outputOrder.size(); ++i) cout<<outputOrder[i]<<endl;
 
 				/// Changes outputs into two bit binary format
 				/*

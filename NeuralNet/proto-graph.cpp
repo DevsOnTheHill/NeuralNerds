@@ -13,6 +13,10 @@ using namespace std;
 #include<math.h>
 #include<string.h>
 
+/* To do list in 2k16 lul
+   Pause button :I
+ */
+
 
 int WIDTH = 650;  // width of the user window
 int HEIGHT = 400;  // height of the user window
@@ -304,6 +308,12 @@ void init_gl_window()
 
 int main()
 {
+  /*
+    setValues();
+    cout << endl;
+  */
+  //setValues2();
+  //setModifiers();
   init_gl_window();
 }
 
